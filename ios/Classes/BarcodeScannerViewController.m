@@ -55,8 +55,11 @@
         if (success) {
             [self startScan];
         } else {
-          [self.delegate barcodeScannerViewController:self didFailWithErrorCode:@"PERMISSION_NOT_GRANTED"];
-          [self dismissViewControllerAnimated:NO completion:nil];
+          //[self.delegate barcodeScannerViewController:self didFailWithErrorCode:@"PERMISSION_NOT_GRANTED"];
+          //[self dismissViewControllerAnimated:NO completion:nil];
+            UIAlertView* curr1=[[UIAlertView alloc] initWithTitle:@"This app does not have access to Camera" message:@"You can enable access in Settings" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Settings", nil];
+            [curr1 show];
+ 
         }
     }];
 }
