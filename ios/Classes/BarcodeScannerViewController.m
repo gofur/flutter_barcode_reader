@@ -1,5 +1,5 @@
 //
-// Created by Matthew Smith on 11/7/17.
+// Updated by Abdul Ghapur (Oval Tech) on 03/March/2019.
 //
 
 #import "BarcodeScannerViewController.h"
@@ -55,11 +55,27 @@
         if (success) {
             [self startScan];
         } else {
-          [self.delegate barcodeScannerViewController:self didFailWithErrorCode:@"PERMISSION_NOT_GRANTED"];
-          [self dismissViewControllerAnimated:NO completion:nil];
+         // [self.delegate barcodeScannerViewController:self didFailWithErrorCode:@"PERMISSION_NOT_GRANTED"];
+         // [self dismissViewControllerAnimated:NO completion:nil];
+         UIAlertView* curr1=[[UIAlertView alloc] initWithTitle:@"This app does not have access to camera" message:@"You can enable access in Settings" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Settings", nil];
+                     curr1.tag=121;
+                     [curr1 show];
+
         }
     }];
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"buttonIndex:%d",buttonIndex);
+
+     if (alertView.tag == 121 && buttonIndex == 1)
+     {
+      //code for opening settings app in iOS 8
+       [[UIApplication sharedApplication] openURL:[NSURL  URLWithString:UIApplicationOpenSettingsURLString]];
+     }
+}
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.scanner stopScanning];
